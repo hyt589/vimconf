@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_ROOT="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+VIM_HOME="$HOME"
+NEOVIM_HOME="$HOME/config/nvim"
+
+ln -sf "$SCRIPT_ROOT/init.vim" "$VIM_HOME/.vimrc"
+ln -sf "$SCRIPT_ROOT/init.vim" "$NEOVIM_HOME/.vimrc"
+
+if ! command -v nvm &> /dev/null
+then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+    nvm install node
+fi
+
+npm install -g neovim
+
+source <(curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)
+source "$HOME/.bashrc"
+
+if command -v python &> /dev/null
+then
+    python -m pip install --user --upgrade pynvim
+fi
+
