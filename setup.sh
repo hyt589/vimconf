@@ -2,7 +2,7 @@
 
 SCRIPT_ROOT="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 VIM_HOME="$HOME"
-NEOVIM_HOME="$HOME/config/nvim"
+NEOVIM_HOME="$HOME/.config/nvim"
 
 ln -sf "$SCRIPT_ROOT/init.vim" "$VIM_HOME/.vimrc"
 ln -sf "$SCRIPT_ROOT/init.vim" "$NEOVIM_HOME/.vimrc"
@@ -13,13 +13,19 @@ then
     nvm install node
 fi
 
-npm install -g neovim
-
-source <(curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)
-source "$HOME/.bashrc"
-
-if command -v python &> /dev/null
+if ! command -v conda &> /dev/null
 then
-    python -m pip install --user --upgrade pynvim
+    source <(curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)
 fi
 
+source "$HOME/.bashrc"
+
+conda activate
+
+npm install -g neovim
+python -m pip install --user --upgrade pynvim
+
+pip install ranger-fm
+
+cd $SCRIPT_ROOT
+git submodule update --init --recursive --depth 1 --progress
