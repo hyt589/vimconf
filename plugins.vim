@@ -41,6 +41,7 @@ Plug 'Shougo/unite.vim'
 
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
-Plug 'ryanoasis/vim-devicons'
+" Always load this plugin last
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

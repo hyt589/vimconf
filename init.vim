@@ -1,4 +1,4 @@
-let g:vim_home = '~/.vimconfig'
+let g:vim_home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let &runtimepath .= ',' .g:vim_home 
 if has('nvim')
 

@@ -1,0 +1,3 @@
+[submodule "vendor/nerd-fonts"]
+	path = vendor/nerd-fonts
+	url = https://github.com/ryanoasis/nerd-fonts.git

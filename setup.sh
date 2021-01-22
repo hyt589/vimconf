@@ -28,4 +28,8 @@ python -m pip install --user --upgrade pynvim
 pip install ranger-fm
 
 cd $SCRIPT_ROOT
-git submodule update --init --recursive --depth 1 --progress
+
+echo 'Set up complete.'
+echo 'You can pull the nerd-fonts submodule to patch the fonts if you want to.'
+echo '    run: git submodule update --init --recursive --depth 1'
+echo 'Beware it is a huge repo'
