@@ -27,8 +27,6 @@ else
 
 endif
 
-set encoding=UTF-8
-
 exec 'source ' . g:vim_home . '/preplugin.vim'
 exec 'source ' . g:vim_home . '/plugins.vim'
 exec 'source ' . g:vim_home . '/coc_config.vim'

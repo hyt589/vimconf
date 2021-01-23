@@ -52,33 +52,33 @@ endfunction
 
 nnoremap Q :q<cr>
 
-nnoremap <leader>1 :call <SID>go_to_buffer_nr(1)<cr>
-nnoremap <leader>2 :call <SID>go_to_buffer_nr(2)<cr>
-nnoremap <leader>3 :call <SID>go_to_buffer_nr(3)<cr>
-nnoremap <leader>4 :call <SID>go_to_buffer_nr(4)<cr>
-nnoremap <leader>5 :call <SID>go_to_buffer_nr(5)<cr>
-nnoremap <leader>6 :call <SID>go_to_buffer_nr(6)<cr>
-nnoremap <leader>7 :call <SID>go_to_buffer_nr(7)<cr>
-nnoremap <leader>8 :call <SID>go_to_buffer_nr(8)<cr>
-nnoremap <leader>9 :call <SID>go_to_buffer_nr(9)<cr>
+nnoremap <silent><leader>1 :call <SID>go_to_buffer_nr(1)<cr>
+nnoremap <silent><leader>2 :call <SID>go_to_buffer_nr(2)<cr>
+nnoremap <silent><leader>3 :call <SID>go_to_buffer_nr(3)<cr>
+nnoremap <silent><leader>4 :call <SID>go_to_buffer_nr(4)<cr>
+nnoremap <silent><leader>5 :call <SID>go_to_buffer_nr(5)<cr>
+nnoremap <silent><leader>6 :call <SID>go_to_buffer_nr(6)<cr>
+nnoremap <silent><leader>7 :call <SID>go_to_buffer_nr(7)<cr>
+nnoremap <silent><leader>8 :call <SID>go_to_buffer_nr(8)<cr>
+nnoremap <silent><leader>9 :call <SID>go_to_buffer_nr(9)<cr>
 
 " nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F3> :VimFilerExplorer<CR>
 
-nnoremap <leader>t :Tnew<CR>
+nnoremap <silent><leader>t :Tnew<CR>
 
-nnoremap <space>1 :silent exe 1 . 'wincmd w'<cr>
-nnoremap <space>2 :silent exe 2 . 'wincmd w'<cr>
-nnoremap <space>3 :silent exe 3 . 'wincmd w'<cr>
-nnoremap <space>4 :silent exe 4 . 'wincmd w'<cr>
-nnoremap <space>5 :silent exe 5 . 'wincmd w'<cr>
-nnoremap <space>6 :silent exe 6 . 'wincmd w'<cr>
-nnoremap <space>7 :silent exe 7 . 'wincmd w'<cr>
-nnoremap <space>8 :silent exe 8 . 'wincmd w'<cr>
-nnoremap <space>9 :silent exe 9 . 'wincmd w'<cr>
+nnoremap <silent><space>1 :silent exe 1 . 'wincmd w'<cr>
+nnoremap <silent><space>2 :silent exe 2 . 'wincmd w'<cr>
+nnoremap <silent><space>3 :silent exe 3 . 'wincmd w'<cr>
+nnoremap <silent><space>4 :silent exe 4 . 'wincmd w'<cr>
+nnoremap <silent><space>5 :silent exe 5 . 'wincmd w'<cr>
+nnoremap <silent><space>6 :silent exe 6 . 'wincmd w'<cr>
+nnoremap <silent><space>7 :silent exe 7 . 'wincmd w'<cr>
+nnoremap <silent><space>8 :silent exe 8 . 'wincmd w'<cr>
+nnoremap <silent><space>9 :silent exe 9 . 'wincmd w'<cr>
 
 map <c-_> gcc
-nnoremap <c-s> :wa<cr>
+nnoremap <silent><c-s> :wa<cr>
 
 if filereadable(getcwd() . '/.config.vim')
   echom 'Project config detected, loading...'
