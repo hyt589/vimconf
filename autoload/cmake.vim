@@ -40,6 +40,24 @@ function cmake#build() abort
   execute 'T ' . l:command_str
 endfunction
 
+function cmake#reconfigure() abort
+  if filereadable(getcwd() . '/' . g:cmake#build_dir_rel . '/CMakeCache.txt')
+    execute '! rm ' . getcwd() . '/' . g:cmake#build_dir_rel . '/CMakeCache.txt'
+  endif
+  call cmake#configure()
+endfunction
+
+function cmake#clean()
+  if isdirectory(getcwd() . '/' . g:cmake#build_dir_rel)
+    execute '! rm -rf ' . getcwd() . '/' . g:cmake#build_dir_rel
+  endif
+endfunction
+
+function cmake#clean_rebuild()
+  call cmake#clean()
+  call cmake#build()
+endfunction
+
 function cmake#init() abort
   if ! filereadable(getcwd() . '/CMakeLists.txt')
     let s:cmake_list_found = 0

@@ -54,6 +54,7 @@ function s:check_project_config() abort
   if filereadable(getcwd() . '/' . g:project_local_config)
     execute 'source ' . getcwd() . '/' . g:project_local_config
   endif
+  call cmake#init()
 endfunction
 
 nnoremap Q :q<cr>
@@ -72,7 +73,8 @@ nnoremap <silent><leader>bd :bdelete<cr>
 nnoremap <silent><F3> :NERDTreeToggle<CR>
 " nnoremap <F3> :VimFilerExplorer<CR>
 
-nnoremap <silent><leader>t :Tnew<CR>
+nnoremap <silent><leader>t :Topen<CR>
+tnoremap <esc> <c-\><c-n>
 
 nnoremap <silent><space>1 :silent exe 1 . 'wincmd w'<cr>
 nnoremap <silent><space>2 :silent exe 2 . 'wincmd w'<cr>
