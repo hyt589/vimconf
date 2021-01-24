@@ -9,8 +9,7 @@ let g:airline_section_a = "%{winnr()}"
 let g:airline_focuslost_inactive = 1
 let g:airline_theme='onehalfdark'
 
-
-set number relativenumber mouse=a nowrap
+set number relativenumber mouse=a nowrap cursorline 
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 syntax on
@@ -27,6 +26,7 @@ autocmd BufNewFile,BufRead *.vimrc call s:viml_mode()
 autocmd BufNewFile,BufRead *CMakeLists.txt call s:cmake_mode()
 autocmd BufNewFile,BufRead *.cmake call s:cmake_mode()
 autocmd BufNewFile,BufRead *.json call s:json_mode()
+autocmd User RooterChDir call s:check_project_config()
 
 function s:cpp_mode() abort
   setlocal sw=4
@@ -50,6 +50,12 @@ function s:go_to_buffer_nr(num) abort
   execute 'b' . l:listed_buffers[a:num-1]
 endfunction
 
+function s:check_project_config() abort
+  if filereadable(getcwd() . '/' . g:project_local_config)
+    execute 'source ' . getcwd() . '/' . g:project_local_config
+  endif
+endfunction
+
 nnoremap Q :q<cr>
 
 nnoremap <silent><leader>1 :call <SID>go_to_buffer_nr(1)<cr>
@@ -61,9 +67,10 @@ nnoremap <silent><leader>6 :call <SID>go_to_buffer_nr(6)<cr>
 nnoremap <silent><leader>7 :call <SID>go_to_buffer_nr(7)<cr>
 nnoremap <silent><leader>8 :call <SID>go_to_buffer_nr(8)<cr>
 nnoremap <silent><leader>9 :call <SID>go_to_buffer_nr(9)<cr>
+nnoremap <silent><leader>bd :bdelete<cr>
 
-" nnoremap <F3> :NERDTreeToggle<CR>
-nnoremap <F3> :VimFilerExplorer<CR>
+nnoremap <silent><F3> :NERDTreeToggle<CR>
+" nnoremap <F3> :VimFilerExplorer<CR>
 
 nnoremap <silent><leader>t :Tnew<CR>
 
@@ -76,13 +83,12 @@ nnoremap <silent><space>6 :silent exe 6 . 'wincmd w'<cr>
 nnoremap <silent><space>7 :silent exe 7 . 'wincmd w'<cr>
 nnoremap <silent><space>8 :silent exe 8 . 'wincmd w'<cr>
 nnoremap <silent><space>9 :silent exe 9 . 'wincmd w'<cr>
+nnoremap <silent><space>ws :split<cr>
+nnoremap <silent><space>wv :vsplit<cr>
+
+nnoremap <silent><space>r :exec 'source ' . g:vim_home . '/init.vim'<cr>
 
 map <c-_> gcc
 nnoremap <silent><c-s> :wa<cr>
 
-if filereadable(getcwd() . '/.config.vim')
-  echom 'Project config detected, loading...'
-  execute 'source ' . getcwd() . '/.config.vim'
-endif
-
-call cmake#init()
+call s:check_project_config()

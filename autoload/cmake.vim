@@ -36,7 +36,7 @@ endfunction
 function cmake#build() abort
   call cmake#configure()
   let l:command_str = 'cd ' . getcwd() . '/' . g:cmake#build_dir_rel . ';'
-  l:command_str .= 'make -j8; cd ..;'
+  let l:command_str .= 'make -j8; cd ..;'
   execute 'T ' . l:command_str
 endfunction
 
