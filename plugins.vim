@@ -29,11 +29,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-if ! has('nvim')
-    Plug 'puremourning/vimspector'
-else
-    Plug 'idanarye/vim-vebugger'
-endif
+Plug 'puremourning/vimspector'
+Plug 'idanarye/vim-vebugger'
 
 Plug 'preservim/nerdtree'
 
@@ -54,6 +51,7 @@ endif
 Plug 'Shougo/vimfiler.vim'
 
 Plug 'liuchengxu/vista.vim'
+Plug 'preservim/tagbar'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

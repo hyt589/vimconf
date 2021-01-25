@@ -1,11 +1,10 @@
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_size = 15
 let g:neoterm_autoinsert = 1
 let g:airline_inactive_collapse=0
-let g:airline_section_a = "%{winnr()}"
 let g:airline_focuslost_inactive = 1
 let g:airline_theme='onehalfdark'
 
@@ -27,6 +26,7 @@ autocmd BufNewFile,BufRead *CMakeLists.txt call s:cmake_mode()
 autocmd BufNewFile,BufRead *.cmake call s:cmake_mode()
 autocmd BufNewFile,BufRead *.json call s:json_mode()
 autocmd User RooterChDir call s:check_project_config()
+autocmd User AirlineAfterInit let g:airline_section_a = "%#__accent_bold#%{winnr()} - " . g:airline_section_a
 
 function s:cpp_mode() abort
   setlocal sw=4
