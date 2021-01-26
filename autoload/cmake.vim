@@ -6,7 +6,7 @@ let g:cmake#build_dir_rel = 'build'
 
 function cmake#configure() abort
   " quit if no CMakeLists.txt file was found
-  if ! s:cmake_list_found 
+  if ! s:cmake_list_found
     echom "No CMake project found!"
     return
   endif
@@ -22,14 +22,14 @@ function cmake#configure() abort
   for key in l:definition_keys
     let l:val = g:cmake#definitions[key]
     if len(l:val) == 0
-      let l:definition_str .= ' -D' . key 
+      let l:definition_str .= ' -D' . key
       else
         let l:definition_str .= ' -D' . key . '=' . l:val
     endif
   endfor
   let l:command_str = 'cd ' . getcwd() . '/' . g:cmake#build_dir_rel . ';'
   let l:command_str .= 'cmake ' . l:define_build_type . l:definition_str . ' ..;'
-  let l:command_str .= 'cd ..; ln -s ' . g:cmake#build_dir_rel . '/compile_commands.json compile_commands.json'
+  let l:command_str .= 'cd ..; ln -sf ' . g:cmake#build_dir_rel . '/compile_commands.json compile_commands.json'
   execute 'T ' . l:command_str
 endfunction
 
@@ -61,9 +61,20 @@ endfunction
 function cmake#init() abort
   if ! filereadable(getcwd() . '/CMakeLists.txt')
     let s:cmake_list_found = 0
+    silent! unmap <silent><F17>
+    silent! unmap <silent><F24>
+    silent! unmap <silent><F19>
+    silent! unmap <silent><F18>
+    silent! unmap <silent><F20>
     return
-  endif 
+  endif
 
-  echom 'Cmake project detected'
+  echo 'Cmake project detected'
   let s:cmake_list_found = 1
+
+  nmap <silent><F17> :call cmake#configure()<cr>
+  nmap <silent><F24> :call cmake#clean()<cr>
+  nmap <silent><F19> :call cmake#build()<cr>
+  nmap <silent><F18> :call cmake#reconfigure()<cr>
+  nmap <silent><F20> :call cmake#clean_rebuild()<cr>
 endfunction

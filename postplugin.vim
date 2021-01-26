@@ -7,12 +7,13 @@ let g:neoterm_autoinsert = 1
 let g:airline_inactive_collapse=0
 let g:airline_focuslost_inactive = 1
 let g:airline_theme='onehalfdark'
+let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-11.so.1'
 
-set number relativenumber mouse=a nowrap cursorline 
+set number relativenumber mouse=a nowrap cursorline
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 syntax on
-set t_Co=256
+set termguicolors
 
 colorscheme onehalfdark
 
@@ -51,10 +52,10 @@ function s:go_to_buffer_nr(num) abort
 endfunction
 
 function s:check_project_config() abort
+  call cmake#init()
   if filereadable(getcwd() . '/' . g:project_local_config)
     execute 'source ' . getcwd() . '/' . g:project_local_config
   endif
-  call cmake#init()
 endfunction
 
 nnoremap Q :q<cr>
@@ -70,6 +71,7 @@ nnoremap <silent><leader>8 :call <SID>go_to_buffer_nr(8)<cr>
 nnoremap <silent><leader>9 :call <SID>go_to_buffer_nr(9)<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
 
+nnoremap <silent><F2> :TagbarToggle<CR>
 nnoremap <silent><F3> :NERDTreeToggle<CR>
 " nnoremap <F3> :VimFilerExplorer<CR>
 
@@ -92,5 +94,20 @@ nnoremap <silent><space>r :exec 'source ' . g:vim_home . '/init.vim'<cr>
 
 map <c-_> gcc
 nnoremap <silent><c-s> :wa<cr>
+
+nnoremap <silent><leader>db :call debug#ToggleBreakPoint()<cr>
+nnoremap <silent><F16> :call debug#Launch()<cr>
+nnoremap <silent><F5> :call debug#StepOver()<cr>
+nnoremap <silent><F6> :call debug#StepInto()<cr>
+nnoremap <silent><F7> :call debug#StepOut()<cr>
+nnoremap <silent><F8> :call debug#RunToCursor()<cr>
+nnoremap <silent><F9> :call debug#Continue()<cr>
+nnoremap <silent><F10> :call debug#Stop()<cr>
+
+vnoremap > >gv
+vnoremap < <gv
+
+nnoremap <silent><leader>p :MarkdownPreview<cr>
+nnoremap <silent><leader>P :MarkdownPreviewStop<cr>
 
 call s:check_project_config()

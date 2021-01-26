@@ -68,6 +68,12 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 Plug 'airblade/vim-rooter'
 
+Plug 'arakashic/chromatica.nvim'
+
+Plug 'rakr/vim-one'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 " Always load this plugin last
 " Plug 'ryanoasis/vim-devicons'
 
