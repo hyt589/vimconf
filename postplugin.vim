@@ -60,6 +60,9 @@ endfunction
 
 nnoremap Q :q<cr>
 
+nnoremap <c-j> jzz
+nnoremap <c-k> kzz
+
 nnoremap <silent><leader>1 :call <SID>go_to_buffer_nr(1)<cr>
 nnoremap <silent><leader>2 :call <SID>go_to_buffer_nr(2)<cr>
 nnoremap <silent><leader>3 :call <SID>go_to_buffer_nr(3)<cr>
@@ -87,8 +90,8 @@ nnoremap <silent><space>6 :silent exe 6 . 'wincmd w'<cr>
 nnoremap <silent><space>7 :silent exe 7 . 'wincmd w'<cr>
 nnoremap <silent><space>8 :silent exe 8 . 'wincmd w'<cr>
 nnoremap <silent><space>9 :silent exe 9 . 'wincmd w'<cr>
-nnoremap <silent><space>ws :split<cr>
-nnoremap <silent><space>wv :vsplit<cr>
+
+nnoremap <space>w <c-w>
 
 nnoremap <silent><space>r :exec 'source ' . g:vim_home . '/init.vim'<cr>
 
