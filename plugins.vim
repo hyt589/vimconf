@@ -74,7 +74,9 @@ Plug 'rakr/vim-one'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+Plug 'easymotion/vim-easymotion'
+
 " Always load this plugin last
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

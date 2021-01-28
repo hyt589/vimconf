@@ -8,12 +8,15 @@ let g:airline_inactive_collapse=0
 let g:airline_focuslost_inactive = 1
 let g:airline_theme='onehalfdark'
 let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-11.so.1'
+let g:airline_powerline_fonts = 1
 
-set number relativenumber mouse=a nowrap cursorline
+set number relativenumber mouse=a nowrap cursorline cmdheight=1
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 syntax on
-set termguicolors
+if has('nvim')
+  set termguicolors
+endif
 
 colorscheme onehalfdark
 
@@ -26,8 +29,15 @@ autocmd BufNewFile,BufRead *.vimrc call s:viml_mode()
 autocmd BufNewFile,BufRead *CMakeLists.txt call s:cmake_mode()
 autocmd BufNewFile,BufRead *.cmake call s:cmake_mode()
 autocmd BufNewFile,BufRead *.json call s:json_mode()
+autocmd BufNewFile,BufRead *.md call s:markdown_mode()
 autocmd User RooterChDir call s:check_project_config()
 autocmd User AirlineAfterInit let g:airline_section_a = "%#__accent_bold#%{winnr()} - " . g:airline_section_a
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd silent! CocEnable
+
+function s:markdown_mode() abort
+  setlocal wrap sw=2
+endfunction
 
 function s:cpp_mode() abort
   setlocal sw=4
@@ -48,7 +58,19 @@ endfunction
 function s:go_to_buffer_nr(num) abort
   let l:possible_buffers = range(1, bufnr('$'))
   let l:listed_buffers = filter(l:possible_buffers, 'buflisted(v:val)')
+  let l:listed_buffers = filter(l:listed_buffers, 'getbufvar(v:val, "&buftype") ==# ""')
   execute 'b' . l:listed_buffers[a:num-1]
+endfunction
+
+function s:clear_saved_buffer() abort
+  let l:possible_buffers = range(1, bufnr('$'))
+  let l:listed_buffers = filter(l:possible_buffers, 'buflisted(v:val)')
+  let l:listed_buffers = filter(l:listed_buffers, 'getbufvar(v:val, "&buftype") !=# "terminal"')
+  let l:saved_buffers = filter(l:listed_buffers, 'getbufvar(v:val, "&mod") !=# "1"')
+  let l:saved_buffers = filter(l:saved_buffers, 'v:val != bufnr("%")')
+  for l:buf in l:saved_buffers
+    execute 'bdelete ' . l:buf
+  endfor
 endfunction
 
 function s:check_project_config() abort
@@ -62,6 +84,8 @@ nnoremap Q :q<cr>
 
 nnoremap <c-j> jzz
 nnoremap <c-k> kzz
+nnoremap o zzo
+nnoremap O zzO
 
 nnoremap <silent><leader>1 :call <SID>go_to_buffer_nr(1)<cr>
 nnoremap <silent><leader>2 :call <SID>go_to_buffer_nr(2)<cr>
@@ -73,6 +97,7 @@ nnoremap <silent><leader>7 :call <SID>go_to_buffer_nr(7)<cr>
 nnoremap <silent><leader>8 :call <SID>go_to_buffer_nr(8)<cr>
 nnoremap <silent><leader>9 :call <SID>go_to_buffer_nr(9)<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
+nnoremap <silent><leader>bc :call <SID>clear_saved_buffer()<cr>
 
 nnoremap <silent><F2> :TagbarToggle<CR>
 nnoremap <silent><F3> :NERDTreeToggle<CR>
@@ -81,15 +106,15 @@ nnoremap <silent><F3> :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :Topen<CR>
 tnoremap <esc> <c-\><c-n>
 
-nnoremap <silent><space>1 :silent exe 1 . 'wincmd w'<cr>
-nnoremap <silent><space>2 :silent exe 2 . 'wincmd w'<cr>
-nnoremap <silent><space>3 :silent exe 3 . 'wincmd w'<cr>
-nnoremap <silent><space>4 :silent exe 4 . 'wincmd w'<cr>
-nnoremap <silent><space>5 :silent exe 5 . 'wincmd w'<cr>
-nnoremap <silent><space>6 :silent exe 6 . 'wincmd w'<cr>
-nnoremap <silent><space>7 :silent exe 7 . 'wincmd w'<cr>
-nnoremap <silent><space>8 :silent exe 8 . 'wincmd w'<cr>
-nnoremap <silent><space>9 :silent exe 9 . 'wincmd w'<cr>
+nnoremap <silent><space>1 :exe 1 . 'wincmd w'<cr>
+nnoremap <silent><space>2 :exe 2 . 'wincmd w'<cr>
+nnoremap <silent><space>3 :exe 3 . 'wincmd w'<cr>
+nnoremap <silent><space>4 :exe 4 . 'wincmd w'<cr>
+nnoremap <silent><space>5 :exe 5 . 'wincmd w'<cr>
+nnoremap <silent><space>6 :exe 6 . 'wincmd w'<cr>
+nnoremap <silent><space>7 :exe 7 . 'wincmd w'<cr>
+nnoremap <silent><space>8 :exe 8 . 'wincmd w'<cr>
+nnoremap <silent><space>9 :exe 9 . 'wincmd w'<cr>
 
 nnoremap <space>w <c-w>
 
@@ -99,7 +124,7 @@ map <c-_> gcc
 nnoremap <silent><c-s> :wa<cr>
 
 nnoremap <silent><leader>db :call debug#ToggleBreakPoint()<cr>
-nnoremap <silent><F16> :call debug#Launch()<cr>
+nnoremap <silent><F4> :call debug#Launch()<cr>
 nnoremap <silent><F5> :call debug#StepOver()<cr>
 nnoremap <silent><F6> :call debug#StepInto()<cr>
 nnoremap <silent><F7> :call debug#StepOut()<cr>
@@ -112,5 +137,8 @@ vnoremap < <gv
 
 nnoremap <silent><leader>p :MarkdownPreview<cr>
 nnoremap <silent><leader>P :MarkdownPreviewStop<cr>
+
+" Easymotion
+map <leader><leader> <Plug>(easymotion-prefix)
 
 call s:check_project_config()

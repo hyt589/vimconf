@@ -7,6 +7,8 @@ exec 'source ' . g:vim_home . '/coc_config.vim'
 exec 'source ' . g:vim_home . '/postplugin.vim'
 
 if len(expand('%')) == 0
-  exec 'intro'
+  if has('nvim')
+    exec 'intro'
+  endif
   call timer_start(200, {-> execute('Ranger')})
 endif
