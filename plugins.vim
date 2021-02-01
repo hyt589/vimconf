@@ -76,6 +76,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 Plug 'easymotion/vim-easymotion'
 
+Plug 'godlygeek/tabular'
+
 " Always load this plugin last
 Plug 'ryanoasis/vim-devicons'
 

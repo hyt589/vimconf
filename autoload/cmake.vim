@@ -29,7 +29,7 @@ function cmake#configure() abort
   endfor
   let l:command_str = 'cd ' . getcwd() . '/' . g:cmake#build_dir_rel . ';'
   let l:command_str .= 'cmake ' . l:define_build_type . l:definition_str . ' ..;'
-  let l:command_str .= 'cd ..; ln -sf ' . g:cmake#build_dir_rel . '/compile_commands.json compile_commands.json'
+  let l:command_str .= 'cd ..; ln -sf ' . g:cmake#build_dir_rel . '/compile_commands.json compile_commands.json;'
   execute 'T ' . l:command_str
 endfunction
 
