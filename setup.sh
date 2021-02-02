@@ -11,7 +11,9 @@ mkdir -p $NEOVIM_HOME
 ln -sf "$SCRIPT_ROOT/init.vim" "$VIM_HOME/.vimrc"
 ln -sf "$SCRIPT_ROOT/init.vim" "$NEOVIM_HOME/init.vim"
 
-if ! command -v nvm &> /dev/null
+[[ -s $NVM_DIR/nvm.sh ]] && . $NVM_DIR/nvm.sh
+
+if ! type -t nvm &> /dev/null
 then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 fi
@@ -23,11 +25,10 @@ then
     rm -f Miniconda3-latest-Linux-x86_64.sh
 fi
 
-source "$HOME/.bashrc"
-
 nvm install node
 npm install -g neovim
 
+[[ -s $CONDA_PREFIX/etc/profile.d/conda.sh ]] && . $CONDA_PREFIX/etc/profile.d/conda.sh
 conda activate
 python -m pip install --user --upgrade pynvim
 pip install ranger-fm
