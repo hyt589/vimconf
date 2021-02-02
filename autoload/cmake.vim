@@ -62,10 +62,15 @@ function cmake#init() abort
   if ! filereadable(getcwd() . '/CMakeLists.txt')
     let s:cmake_list_found = 0
     silent! unmap <silent><S-F5>
+    silent! unmap <silent><F17>
     silent! unmap <silent><S-F12>
+    silent! unmap <silent><F24>
     silent! unmap <silent><S-F7>
+    silent! unmap <silent><F19>
     silent! unmap <silent><S-F6>
+    silent! unmap <silent><F18>
     silent! unmap <silent><S-F8>
+    silent! unmap <silent><F20>
     return
   endif
 
@@ -73,8 +78,13 @@ function cmake#init() abort
   let s:cmake_list_found = 1
 
   nmap <silent><S-F5> :call cmake#configure()<cr>
+  nmap <silent><F17> :call cmake#configure()<cr>
   nmap <silent><S-F12> :call cmake#clean()<cr>
+  nmap <silent><F24> :call cmake#clean()<cr>
   nmap <silent><S-F7> :call cmake#build()<cr>
+  nmap <silent><F19> :call cmake#build()<cr>
   nmap <silent><S-F6> :call cmake#reconfigure()<cr>
+  nmap <silent><F18> :call cmake#reconfigure()<cr>
   nmap <silent><S-F8> :call cmake#clean_rebuild()<cr>
+  nmap <silent><F20> :call cmake#clean_rebuild()<cr>
 endfunction
