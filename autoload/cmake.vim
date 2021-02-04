@@ -13,7 +13,6 @@ function cmake#configure() abort
 
   " check if the build directory is preset
   if ! isdirectory(getcwd() . '/' . g:cmake#build_dir_rel)
-    echom "Create binary directory at " . getcwd() . "/" . g:cmake#build_dir_rel
     call mkdir(getcwd() . '/' . g:cmake#build_dir_rel, 'p')
   endif
   let l:define_build_type = ' -DCMAKE_BUILD_TYPE=' . g:cmake#build_type . ' '
@@ -42,14 +41,14 @@ endfunction
 
 function cmake#reconfigure() abort
   if filereadable(getcwd() . '/' . g:cmake#build_dir_rel . '/CMakeCache.txt')
-    execute '! rm ' . getcwd() . '/' . g:cmake#build_dir_rel . '/CMakeCache.txt'
+    silent! execute '! rm ' . getcwd() . '/' . g:cmake#build_dir_rel . '/CMakeCache.txt'
   endif
   call cmake#configure()
 endfunction
 
 function cmake#clean()
   if isdirectory(getcwd() . '/' . g:cmake#build_dir_rel)
-    execute '! rm -rf ' . getcwd() . '/' . g:cmake#build_dir_rel
+    silent! execute '! rm -rf ' . getcwd() . '/' . g:cmake#build_dir_rel
   endif
 endfunction
 

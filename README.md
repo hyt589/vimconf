@@ -2,6 +2,10 @@
 
 This is my personal vim configuration repo.
 
+## Prerequisite
+
+This configuration is created on Linux x86_64, and may not work on different system configuration.
+
 ## How to use
 
 1. Backup your `.vimrc` or `init.vim` if you are using `nvim`
