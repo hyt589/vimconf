@@ -1,13 +1,15 @@
 let g:coc_global_extensions = [
 \ 'coc-clangd',
-\ 'coc-pyright',
-\ 'coc-vimlsp',
-\ 'coc-json',
+\ 'coc-cmake',
+\ 'coc-docker',
 \ 'coc-git',
-\ 'coc-sh',
-\ 'coc-pairs',
+\ 'coc-json',
 \ 'coc-marketplace',
-\ 'coc-snippets'
+\ 'coc-pairs',
+\ 'coc-pyright',
+\ 'coc-sh',
+\ 'coc-snippets',
+\ 'coc-vimlsp',
 \ ]
 
 " TextEdit might fail if hidden is not set.
