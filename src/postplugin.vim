@@ -1,14 +1,14 @@
 let g:airline#extensions#tabline#enabled         = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-" let g:vimspector_enable_mappings = 'HUMAN'
-let g:neoterm_default_mod        = 'botright'
-let g:neoterm_size               = 15
-let g:neoterm_autoinsert         = 1
-let g:airline_inactive_collapse  = 0
-let g:airline_focuslost_inactive = 1
-let g:airline_theme              = 'onehalfdark'
-let g:chromatica#libclang_path   = '/usr/lib/x86_64-linux-gnu/libclang-11.so.1'
-let g:airline_powerline_fonts    = 1
+let g:neoterm_default_mod                        = 'botright'
+let g:neoterm_size                               = 15
+let g:neoterm_autoinsert                         = 1
+let g:airline_inactive_collapse                  = 0
+let g:airline_focuslost_inactive                 = 1
+let g:airline_theme                              = 'onehalfdark'
+let g:chromatica#libclang_path                   = '/usr/lib/x86_64-linux-gnu/libclang-11.so.1'
+let g:airline_powerline_fonts                    = 1
+let g:vista_default_executive                    = 'coc'
 
 set number relativenumber mouse=a nowrap cursorline cmdheight=1
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -18,22 +18,23 @@ if has('nvim')
   set termguicolors
 endif
 
-colorscheme onehalfdark
+colorscheme one
 
-autocmd BufNewFile,BufRead *.c call s:cpp_mode()
-autocmd BufNewFile,BufRead *.cpp call s:cpp_mode()
-autocmd BufNewFile,BufRead *.h call s:cpp_mode()
-autocmd BufNewFile,BufRead *.hpp call s:cpp_mode()
-autocmd BufNewFile,BufRead *.vim call s:viml_mode()
-autocmd BufNewFile,BufRead *.vimrc call s:viml_mode()
+autocmd BufNewFile,BufRead *.c             call s:cpp_mode()
+autocmd BufNewFile,BufRead *.cpp           call s:cpp_mode()
+autocmd BufNewFile,BufRead *.h             call s:cpp_mode()
+autocmd BufNewFile,BufRead *.hpp           call s:cpp_mode()
+autocmd BufNewFile,BufRead *.vim           call s:viml_mode()
+autocmd BufNewFile,BufRead *.vimrc         call s:viml_mode()
 autocmd BufNewFile,BufRead *CMakeLists.txt call s:cmake_mode()
-autocmd BufNewFile,BufRead *.cmake call s:cmake_mode()
-autocmd BufNewFile,BufRead *.json call s:json_mode()
-autocmd BufNewFile,BufRead *.md call s:markdown_mode()
-autocmd User RooterChDir call s:check_project_config()
-autocmd User AirlineAfterInit let g:airline_section_a = "%#__accent_bold#%{winnr()} - " . g:airline_section_a
+autocmd BufNewFile,BufRead *.cmake         call s:cmake_mode()
+autocmd BufNewFile,BufRead *.json          call s:json_mode()
+autocmd BufNewFile,BufRead *.md            call s:markdown_mode()
+
+autocmd User RooterChDir           silent! call s:check_project_config()
+autocmd User AirlineAfterInit      silent! let g:airline_section_a = "%#__accent_bold#%{winnr()} - " . g:airline_section_a
 autocmd User EasyMotionPromptBegin silent! CocDisable
-autocmd User EasyMotionPromptEnd silent! call s:after_easy_motion()
+autocmd User EasyMotionPromptEnd   silent! call s:after_easy_motion()
 
 function s:after_easy_motion() abort
   execute 'silent! CocEnable'
@@ -58,6 +59,7 @@ endfunction
 
 function s:json_mode() abort
   setlocal sw=2
+  call JSON#formatCurrentBuffer()
 endfunction
 
 function s:go_to_buffer_nr(num) abort
@@ -104,7 +106,8 @@ nnoremap <silent><leader>9 :call <SID>go_to_buffer_nr(9)<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
 nnoremap <silent><leader>bc :call <SID>clear_saved_buffer()<cr>
 
-nnoremap <silent><F2> :TagbarToggle<CR>
+" nnoremap <silent><F2> :TagbarToggle<CR>
+nnoremap <silent><F2> :Vista!!<CR>
 " nnoremap <silent><F3> :NERDTreeToggle<CR>
 nnoremap <silent><F3> :VimFilerExplorer<CR>
 
@@ -146,11 +149,15 @@ nnoremap <silent><leader>P :MarkdownPreviewStop<cr>
 nmap <Leader><Leader>s <Plug>(easymotion-sn)
 xmap <Leader><Leader>s <Plug>(easymotion-sn)
 omap <Leader><Leader>z <Plug>(easymotion-sn)
+
 nmap <Leader>s <Plug>(easymotion-s2)
 xmap <Leader>s <Plug>(easymotion-s2)
 omap <Leader>z <Plug>(easymotion-s2)
 
 " Easymotion
 map <leader><leader> <Plug>(easymotion-prefix)
+
+call JSON#init()
+call debug#Init()
 
 call s:check_project_config()
