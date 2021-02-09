@@ -10,15 +10,14 @@ let g:chromatica#libclang_path                   = '/usr/lib/x86_64-linux-gnu/li
 let g:airline_powerline_fonts                    = 1
 let g:vista_default_executive                    = 'coc'
 
-set number relativenumber mouse=a nowrap cursorline cmdheight=1
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set cmdheight=1
 
-syntax on
 if has('nvim')
   set termguicolors
 endif
 
-colorscheme one
+colorscheme onehalfdark
+highlight Comment gui=None
 
 autocmd BufNewFile,BufRead *.c             call s:cpp_mode()
 autocmd BufNewFile,BufRead *.cpp           call s:cpp_mode()
@@ -82,6 +81,10 @@ endfunction
 
 function s:check_project_config() abort
   call cmake#init()
+  call ProjectConfigure()
+endfunction
+
+function ProjectConfigure() abort
   if filereadable(getcwd() . '/' . g:project_local_config)
     execute 'source ' . getcwd() . '/' . g:project_local_config
   endif

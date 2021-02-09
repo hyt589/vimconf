@@ -32,6 +32,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'puremourning/vimspector'
 Plug 'idanarye/vim-vebugger'
 
+Plug 'michaeljsmith/vim-indent-object'
+
 Plug 'preservim/nerdtree'
 
 Plug 'francoiscabrol/ranger.vim'
