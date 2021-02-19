@@ -9,6 +9,7 @@ let g:airline_theme                              = 'onehalfdark'
 let g:chromatica#libclang_path                   = '/usr/lib/x86_64-linux-gnu/libclang-11.so.1'
 let g:airline_powerline_fonts                    = 1
 let g:vista_default_executive                    = 'coc'
+let g:vista_sidebar_width                        = 60
 
 set cmdheight=1
 
