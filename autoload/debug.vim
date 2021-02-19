@@ -2,6 +2,11 @@ function debug#ToggleBreakPoint() abort
   call vimspector#ToggleBreakpoint()
 endfunction
 
+function debug#ToggleConditionalBreakPoint() abort
+  let l:expression = input("condition: ")
+  call vimspector#ToggleBreakpoint({'condition' : l:expression})
+endfunction
+
 function debug#Launch() abort
   call vimspector#Launch()
 endfunction

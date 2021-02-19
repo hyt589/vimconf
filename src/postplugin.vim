@@ -134,14 +134,15 @@ nnoremap <silent><space>r :exec 'source ' . g:vim_home . '/init.vim'<cr>
 map <c-_> gcc
 nnoremap <silent><c-s> :wa<cr>
 
-nnoremap <silent><leader>db :call debug#ToggleBreakPoint()<cr>
-nnoremap <silent><F4>       :call debug#Launch()<cr>
-nnoremap <silent><F5>       :call debug#StepOver()<cr>
-nnoremap <silent><F6>       :call debug#StepInto()<cr>
-nnoremap <silent><F7>       :call debug#StepOut()<cr>
-nnoremap <silent><F8>       :call debug#RunToCursor()<cr>
-nnoremap <silent><F9>       :call debug#Continue()<cr>
-nnoremap <silent><F10>      :call debug#Stop()<cr>
+nnoremap <silent><leader>db  :call debug#ToggleBreakPoint()<cr>
+nnoremap <silent><leader>dcb :call debug#ToggleConditionalBreakPoint()<cr>
+nnoremap <silent><F4>        :call debug#Launch()<cr>
+nnoremap <silent><F5>        :call debug#StepOver()<cr>
+nnoremap <silent><F6>        :call debug#StepInto()<cr>
+nnoremap <silent><F7>        :call debug#StepOut()<cr>
+nnoremap <silent><F8>        :call debug#RunToCursor()<cr>
+nnoremap <silent><F9>        :call debug#Continue()<cr>
+nnoremap <silent><F10>       :call debug#Stop()<cr>
 
 vnoremap > >gv
 vnoremap < <gv

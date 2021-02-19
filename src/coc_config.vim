@@ -2,7 +2,6 @@ let g:coc_global_extensions = [
 \ 'coc-clangd',
 \ 'coc-cmake',
 \ 'coc-docker',
-\ 'coc-git',
 \ 'coc-json',
 \ 'coc-marketplace',
 \ 'coc-pairs',
