@@ -131,7 +131,8 @@ nnoremap <space>w <c-w>
 
 nnoremap <silent><space>r :exec 'source ' . g:vim_home . '/init.vim'<cr>
 
-map <c-_> gcc
+nmap <c-_> gcc
+vmap <c-_> gc
 nnoremap <silent><c-s> :wa<cr>
 
 nnoremap <silent><leader>db  :call debug#ToggleBreakPoint()<cr>
