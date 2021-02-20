@@ -29,6 +29,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'szw/vim-maximizer'
+
 Plug 'puremourning/vimspector'
 Plug 'idanarye/vim-vebugger'
 

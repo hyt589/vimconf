@@ -152,16 +152,16 @@ vnoremap < <gv
 nnoremap <silent><leader>p :MarkdownPreview<cr>
 nnoremap <silent><leader>P :MarkdownPreviewStop<cr>
 
+" Easymotion
 nmap <Leader><Leader>s <Plug>(easymotion-sn)
 xmap <Leader><Leader>s <Plug>(easymotion-sn)
 omap <Leader><Leader>z <Plug>(easymotion-sn)
-
 nmap <Leader>s <Plug>(easymotion-s2)
 xmap <Leader>s <Plug>(easymotion-s2)
 omap <Leader>z <Plug>(easymotion-s2)
-
-" Easymotion
 map <leader><leader> <Plug>(easymotion-prefix)
+
+noremap <silent><space>m :MaximizerToggle<cr>
 
 call JSON#init()
 call debug#Init()
